@@ -22,7 +22,7 @@ using namespace std;
 int main()
 {
 	int client, server;
-	int portNum=8080;
+	int portNum=1200;
 	bool isExit = false;
 	int bufsize = 1024;
 	char buffer[bufsize];
@@ -31,7 +31,7 @@ int main()
 	socklen_t size;
 
 	//Inicializar Socket
-	client = socket(AF_INET, SOCK_STREAM, 0);
+	client = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 
 	if (client<0)
 	{
@@ -41,8 +41,11 @@ int main()
 	cout << "Conexión del Socket Server creada..." << endl;
 
 	server_addr.sin_family = AF_INET;
-	server_addr.sin_addr.s_addr = htons(INADDR_ANY);
+	server_addr.sin_addr.s_addr = INADDR_ANY;
 	server_addr.sin_port = htons(portNum);
+
+	memset(&server_addr.sin_zero,0,sizeof(server_addr.sin_zero));
+
 
 	//Binding Socket ( asignarle un nombre y dirección)
 
@@ -56,7 +59,7 @@ int main()
 	cout << "Buscando clientes..." << endl;
 
 	//Listening socket
-	listen(client , 1);
+	listen(client , 5);
 
 	//Aceptar clientes
 	server = accept(client, (struct sockaddr*)&server_addr, &size);
