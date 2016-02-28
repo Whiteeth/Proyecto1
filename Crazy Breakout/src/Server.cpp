@@ -22,9 +22,9 @@ using namespace std;
 int main()
 {
 	int client, server;
-	int portNum=1200;
+	int portNum=8080;
 	bool isExit = false;
-	int bufsize = 1024;
+	int bufsize = 256;
 	char buffer[bufsize];
 
 	struct sockaddr_in server_addr;
@@ -73,48 +73,12 @@ int main()
 	while (server>0)
 	{
 		strcpy(buffer, "Servidor conectado...\n");
-		send(server, buffer, bufsize, 0);
 
+		send(server, buffer, sizeof(buffer), 0);
 		cout << "Conectado con el cliente..." << endl;
 		cout << "Enter # to end the connection" << endl;
-
-		cout <<"Cliente: ";
-
-		do {
-			recv(server, buffer, bufsize, 0);
-			cout << "Buffer" << " ";
-			if (*buffer == '#'){
-				*buffer = '*';
-				isExit = true;
-			}
-
-		} while (*buffer != '*');
-		do {
-			cout << "\nServidor: ";
-			do {
-				cin >> buffer;
-				send(server, buffer, bufsize, 0);
-				if (*buffer == '#'){
-					send(server, buffer, bufsize, 0);
-					*buffer = '#';
-					isExit = true;
-				}
-			} while (*buffer != '*');
-
-			cout << "Cliente: ";
-			do {
-				recv(server, buffer, bufsize, 0);
-				cout << buffer << " ";
-				if (*buffer == '#'){
-					*buffer = '*';
-					isExit = true;
-				}
-			} while (*buffer != '*');
-		} while (isExit);
-
-		cout << "Conexión terminada... " << endl;
-		isExit = false;
-		exit(1);
+		recv(server, buffer, bufsize, 0);
+		cout << buffer << " ";
 	}
 	close(client);
 	return 0;
