@@ -17,6 +17,7 @@
 #include<unistd.h>    //write
 #include<pthread.h> //for threading , link with lpthread
 
+
 using namespace std;
 
 int main()
@@ -72,9 +73,10 @@ int main()
 
 	while (server>0)
 	{
+		int x[10] = {1,2,3,4,5,6,7,8,9,10};
+//		send(server,x, sizeof(x),0);
 		strcpy(buffer, "Servidor conectado...\n");
-
-		send(server, buffer, sizeof(buffer), 0);
+		send(server, buffer, bufsize, 0);
 		cout << "Conectado con el cliente..." << endl;
 		cout << "Enter # to end the connection" << endl;
 		recv(server, buffer, bufsize, 0);
