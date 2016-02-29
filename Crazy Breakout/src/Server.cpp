@@ -63,7 +63,7 @@ int main()
 	//Listening socket
 	listen(client , 5);
 
-	//Aceptar clientes
+	//Aceptar clientes.
 	server = accept(client, (struct sockaddr*)&server_addr, &size);
 
 	if ( server < 0)
