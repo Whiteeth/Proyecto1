@@ -4,7 +4,7 @@
  *  Created on: 28 de feb. de 2016
  *      Author: joao
  */
- // Ball Header
+
 
 #ifndef BALL_H_
 #define BALL_H_
