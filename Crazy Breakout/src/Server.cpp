@@ -75,7 +75,7 @@ int main()
 	while (server>0)
 	{
 
-		int x[10] = {13,9,3,4,5,6,7,8,9,10};
+		int x[10] = {2,9,3,4,5,6,7,8,9,10};
 		send(server,x, sizeof(x),0);
 		strcpy(buffer, "Servidor conectado...\n");
 		send(server, buffer, bufsize, 0);
