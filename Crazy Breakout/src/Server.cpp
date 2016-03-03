@@ -15,8 +15,6 @@
 #include <netinet/in.h>
 #include<arpa/inet.h> //inet_addr
 #include<unistd.h>    //write
-#include<pthread.h> //for threading , link with lpthread
-#include "jsoncpp/json.h"
 
 
 using namespace std;
