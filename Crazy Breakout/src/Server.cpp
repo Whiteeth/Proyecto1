@@ -72,16 +72,24 @@ int main()
 
 	while (server>0)
 	{
-
-		int x[10] = {2,9,3,4,5,6,7,8,9,10};
-		send(server,x, sizeof(x),0);
-//		strcpy(buffer, "Servidor conectado...\n");
-//		send(server, buffer, bufsize, 0);
+		strcpy(buffer, "Servidor conectado...\n");
+		send(server, buffer, bufsize, 0);
 		cout << "Conectado con el cliente..." << endl;
-		cout << "Enter # to end the connection" << endl;
-		recv(server, buffer, bufsize, 0);
-		cout << buffer << " ";
+		do {
+			recv(server, buffer, bufsize, 0);
+			if (*buffer == '#') {
+				*buffer = '*';
+				isExit = true;
+			}
+			cout << buffer << endl;
+		} while (*buffer != '*');
+		cout << "\n\n=> Cnexión terminada con IP " << inet_ntoa(server_addr.sin_addr);
+		close(server);
+		cout << "\nAdiós..." << endl;
+		isExit = false;
+		exit(1);
 	}
 	close(client);
 	return 0;
 }
+
